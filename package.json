@@ -1,10 +1,11 @@
 {
-  "name": "xcaptcha",
+  "name": "colorful-captcha",
   "version": "0.0.1",
-  "description": "Captcha for nodejs ",
+  "description": "Colorful captcha for nodejs ",
   "main": "./dist/index.js",
   "scripts": {
-    "start": "rm -rfv ./dist && tsc --pretty -p ./tsconfig.json && node ./dist/index.js"
+    "build": "rm -rfv ./dist && tsc --pretty -p ./tsconfig.json",
+    "pub": "npm run build && npm publish"
   },
   "repository": {
     "type": "git",
