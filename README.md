@@ -54,7 +54,7 @@ interface CreateCaptchaReturn {
   type: "png";
   // The text array of the verification code
   chars: string[];
-  // The text array of the verification code
+  // The text string of the verification code
   text: string;
   // Width of the verification code image
   width: number;
