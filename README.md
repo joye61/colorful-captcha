@@ -98,4 +98,4 @@ import express from "express";
 
 ## Note
 
-`colorful-captcha` The default width and height of the generated graphic verification code image is `240*80`. You can customize the width and height through parameters, but if you set the value inappropriately, the text may be cropped. In this case, please try to change a more appropriate ratio yourself
+The default width and height of the generated graphic verification code image is `240*80`. You can customize the width and height through parameters, but if you set the value inappropriately, the text may be cropped. In this case, please try to change a more appropriate ratio yourself
