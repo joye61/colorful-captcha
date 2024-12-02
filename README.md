@@ -20,7 +20,7 @@ npm install colorful-captcha
 
 ## Usage
 
-`createCaptchaAsBuffer` 是 `colorful-captch` 导出的核心 API，这是一个异步函数，返回值类型如下：
+`createCaptchaAsBuffer` is the core API exported by `colorful-captch`. This is an asynchronous function with the following return value type：
 
 ```ts
 
