@@ -2,7 +2,7 @@
 
 > Traditional graphic verification codes have been considered an unsafe protection method. Modern OCR or AI technology can easily crack various forms of graphic verification codes. This project is not responsible for the security risks brought by the verification code. Please use it with caution.
 
-Why is it called colorful? Because all its noise, obfuscation elements, and verification code text are randomly generated colors, so it looks good. `colorful-captcha` is a pure JS version of the graphic verification code solution, thanks to [skia-canvas](https://github.com/samizdatco/skia-canvas), it includes a prebuild `.node` implementation, It's very easy to install and to use, No additional compilation process
+Why is it called colorful? Because all its noise, obfuscation elements, and verification code text are randomly generated colors, so it looks good. `colorful-captcha` is a pure JS version of the graphic verification code solution, thanks to [skia-canvas](https://github.com/samizdatco/skia-canvas)
 
 The verification code image is something looks like this：
 
