@@ -1,6 +1,6 @@
 {
   "name": "colorful-captcha",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Colorful captcha for nodejs ",
   "main": "./dist/index.js",
   "scripts": {
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/joye61/xcaptcha.git"
+    "url": "git+https://github.com/joye61/colorful-captcha.git"
   },
   "keywords": [
     "Captcha",
@@ -22,9 +22,9 @@
     "access": "public"
   },
   "bugs": {
-    "url": "https://github.com/joye61/xcaptcha/issues"
+    "url": "https://github.com/joye61/colorful-captcha/issues"
   },
-  "homepage": "https://github.com/joye61/xcaptcha#readme",
+  "homepage": "https://github.com/joye61/colorful-captcha#readme",
   "devDependencies": {
     "@types/node": "^22.10.1",
     "typescript": "^5.7.2"
