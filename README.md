@@ -38,12 +38,12 @@ interface CreateCaptchaOption{
   // Spacing between characters, the default is 5px
   spacing?: number;
   // The length of characters, the default is 4
-  length: number;
+  length?: number;
   // Whether characters are allowed to be repeated, the default is false
-  noRepeat: boolean;
+  noRepeat?: boolean;
   // Source of character extraction, excluding 0, o, l, I
   // Default: "123456789abcdefghijkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ"
-  source: string;
+  source?: string;
 }
 
 // Return value type
