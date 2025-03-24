@@ -1,8 +1,8 @@
 import { DifficultyMode, GetRandomCharsOption, Point } from "./types";
 
-// Source for predefined character extraction, excluding 0, o, l, I
+// Source for predefined character extraction, excluding 1, 0, o, l, I
 export const PreDefinedChars =
-  "123456789abcdefghijkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ";
+  "23456789abcdefghijkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ";
 
 /**
  * Get a random integer value, including 0 and the value itself

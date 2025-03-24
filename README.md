@@ -20,12 +20,12 @@ npm install colorful-captcha
 
 ## Usage
 
-`createCaptchaAsBuffer` is the core API exported by `colorful-captch`. This is an asynchronous function with the following return value type：
+`createCaptcha` is the core API exported by `colorful-captch`. This is an asynchronous function with the following return value type：
 
 ```ts
 
 // Function signature
-createCaptchaAsBuffer(option?: CreateCaptchaOption): Promise<CreateCaptchaReturn>;
+createCaptcha(option?: CreateCaptchaOption): Promise<CreateCaptchaReturn>;
 
 // Parameter type
 interface CreateCaptchaOption{
@@ -44,6 +44,8 @@ interface CreateCaptchaOption{
   // Source of character extraction, excluding 0, o, l, I
   // Default: "123456789abcdefghijkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ"
   source?: string;
+  // Whether to use skia-canvas to generate images, the default is node-canvas
+  useSkia?: boolean;
 }
 
 // Return value type
@@ -68,15 +70,15 @@ interface CreateCaptchaReturn {
 ## Example:
 
 ```ts
-import { createCaptchaAsBuffer } from "colorful-captcha";
+import { createCaptcha } from "colorful-captcha";
 import fs from "node:fs/promises";
 import express from "express";
 
 (async () => {
   // Create captcha as buffer, Same as the function call name
-  const result = createCaptchaAsBuffer();
+  const result = createCaptcha();
   // Create captcha as buffer, With custom parameters
-  const result = createCaptchaAsBuffer({
+  const result = createCaptcha({
     width: 120,
     height: 80,
     mode: "hard",

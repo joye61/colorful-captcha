@@ -5,7 +5,7 @@ import {
   getRandomTextColor,
   PreDefinedChars,
 } from "./random";
-import { createCanvas, createTextCanvas } from "./canvas";
+import { getCanvas, loadFont, NodeCanvas, SkiaCanvas } from "./canvas";
 import type { CreateCaptchaOption, DifficultyParams } from "./types";
 import { ExportFormat } from "skia-canvas";
 
@@ -26,6 +26,7 @@ function parseOption(
     length: 4,
     noRepeat: false,
     source: PreDefinedChars,
+    useSkia: false,
   };
   if (option && typeof option === "object") {
     config = {
@@ -40,6 +41,9 @@ function parseOption(
       `The width and height of the verification code must be specified`
     );
   }
+
+  // Load font
+  loadFont(config.useSkia);
 
   return config as Required<CreateCaptchaOption>;
 }
@@ -69,7 +73,7 @@ export function createCaptchaCanvas(option?: CreateCaptchaOption) {
     noRepeat: config.noRepeat,
     source: config.source,
   });
-  const { canvas, context } = createCanvas(config.width, config.height);
+  const { canvas, context } = getCanvas(config);
   context.fillStyle = "white";
   context.fillRect(0, 0, config.width, config.height);
 
@@ -100,17 +104,14 @@ export function createCaptchaCanvas(option?: CreateCaptchaOption) {
   const met = context.measureText(chars.join(""));
   let start =
     (config.width - met.width - (config.length - 1) * config.spacing) / 2;
+
   for (let i = 0; i < chars.length; i++) {
     const cmet = context.measureText(chars[i]);
     context.fillStyle = getRandomTextColor();
     const x = i === 0 ? start : start + config.spacing;
-    const y = (config.height - cmet.emHeightDescent) / 2;
-    const textCanvas = createTextCanvas(
-      chars[i],
-      cmet.width,
-      cmet.emHeightDescent
-    );
-    context.drawCanvas(textCanvas.canvas, x, y);
+    const y = config.height / 2;
+    start = x + cmet.width;
+    context.fillText(chars[i], x, y);
     start = x + cmet.width;
   }
 
@@ -139,34 +140,23 @@ export function createCaptchaCanvas(option?: CreateCaptchaOption) {
  * @param option CreateCaptchaOption
  * @returns
  */
-export async function createCaptchaAsBuffer(option?: CreateCaptchaOption) {
+export async function createCaptcha(option?: CreateCaptchaOption) {
   const result = createCaptchaCanvas(option);
   const type: ExportFormat = "png";
-  const buffer = await result.canvas.toBuffer(type);
+  const mime = "image/png";
+
+  let buffer: ArrayBufferLike;
+  if (result.useSkia) {
+    buffer = await (result.canvas as SkiaCanvas).toBuffer(type);
+  } else {
+    buffer = (result.canvas as NodeCanvas).toBuffer(mime);
+  }
+
+  // const buffer = result.canvas.toBuffer(mime);
   return {
     buffer,
     type,
-    chars: result.chars,
-    text: result.chars.join(""),
-    width: result.width,
-    height: result.height,
-    mime: "image/png",
-  };
-}
-
-/**
- * Create a graphic verification code file and save it directly
- * @param fileName string
- * @param option CreateCaptchaOption
- * @returns
- */
-export async function createCaptchaAsFile(
-  fileName: string,
-  option?: CreateCaptchaOption
-) {
-  const result = createCaptchaCanvas(option);
-  await result.canvas.saveAs(fileName);
-  return {
+    mime,
     chars: result.chars,
     text: result.chars.join(""),
     width: result.width,

@@ -1,9 +1,35 @@
-import { Canvas, FontLibrary } from "skia-canvas";
+import { Canvas as SkiaCanvas, FontLibrary } from "skia-canvas";
 import path from "path";
-import { getRandomTextColor, getRandomValue } from "./random";
+import { registerFont, createCanvas, Canvas as NodeCanvas } from "canvas";
+import { CreateCaptchaOption } from "./types";
 
+export { SkiaCanvas, NodeCanvas };
+
+// Font family name
 const fontName = "puhuiti";
-FontLibrary.use(fontName, [path.resolve(__dirname, `../${fontName}.ttf`)]);
+
+// Font is loaded or not
+let isFontLoaded = false;
+
+/**
+ * Load font only once
+ * @param useSkia Whether use skia-canvas
+ * @returns
+ */
+export function loadFont(useSkia = false) {
+  if (isFontLoaded) return;
+
+  const fontFile = path.resolve(__dirname, `../${fontName}.ttf`);
+  if (useSkia) {
+    FontLibrary.use(fontName, [fontFile]);
+  } else {
+    registerFont(fontFile, {
+      family: fontName,
+      style: "bold",
+    });
+  }
+  isFontLoaded = true;
+}
 
 /**
  * Init a new canvas with width and height
@@ -11,31 +37,16 @@ FontLibrary.use(fontName, [path.resolve(__dirname, `../${fontName}.ttf`)]);
  * @param height
  * @returns
  */
-export function createCanvas(width: number, height: number) {
-  const canvas = new Canvas(width, height);
+export function getCanvas(option: Required<CreateCaptchaOption>) {
+  let canvas: SkiaCanvas | NodeCanvas;
+  if (option.useSkia) {
+    canvas = new SkiaCanvas(option.width, option.height);
+  } else {
+    canvas = createCanvas(option.width, option.height);
+  }
   const context = canvas.getContext("2d");
-  context.font = `bold ${height - height / 4}px/1 ${fontName}`;
-  context.textBaseline = "top";
-
+  const lineHeight = option.height - option.height / 4;
+  context.font = `bold ${lineHeight}px ${fontName}`;
+  context.textBaseline = "middle";
   return { canvas, context };
-}
-
-/**
- * Create a canvas that just surrounds the text
- * @param char
- * @param width
- * @param height
- * @returns
- */
-export function createTextCanvas(char: string, width: number, height: number) {
-  const canvas = new Canvas(width, height);
-  const context = canvas.getContext("2d");
-  context.font = `bold ${height}px/1 ${fontName}`;
-  context.textBaseline = "top";
-  context.fillStyle = getRandomTextColor();
-  context.translate(width / 2, height / 2);
-  const degree = getRandomValue(60) - 30;
-  context.rotate((degree * Math.PI) / 180);
-  context.fillText(char, -width / 2, -height / 2);
-  return { context, canvas };
 }

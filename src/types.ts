@@ -18,6 +18,8 @@ export interface CreateCaptchaOption extends Partial<GetRandomCharsOption> {
   mode?: DifficultyMode;
   // Spacing between characters
   spacing?: number;
+  // Whether use skia-canvas
+  useSkia?: boolean;
 }
 
 export interface DifficultyParams {
