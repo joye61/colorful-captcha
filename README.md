@@ -202,7 +202,7 @@ const result = await generator.generate();
 
 Default character set excludes confusing characters:
 ```
-23456789abcdefghijkmnpqrstuvwxyzABCDEFGHIJKLMNPQRSTUVWXYZ
+23456789abcdefghijkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ
 ```
 
 Excluded characters: `0`, `O`, `o`, `1`, `l`, `I`
