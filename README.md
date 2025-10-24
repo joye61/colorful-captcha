@@ -10,9 +10,7 @@ A Node.js based colorful captcha generation library that provides high-quality g
 - 🛡️ **Three Difficulty Levels**: Easy, normal, hard interference levels
 - 🎯 **Highly Customizable**: Support custom dimensions, character sources, spacing, etc.
 - 🔤 **Smart Characters**: Exclude confusing characters by default (0, O, l, I, 1)
-- 🌈 **Visual Optimization**: Built-in Alibaba PuHuiTi font for excellent visual effects
-- ⚡ **High Performance**: Based on skia-canvas with excellent rendering performance
-- 📦 **TypeScript**: Complete type definitions and intelligent prompts
+- ⚡ **High Performance**: Based on [skia-canvas](https://github.com/samizdatco/skia-canvas) with excellent rendering performance
 
 ## Preview
 
@@ -191,12 +189,6 @@ const result = await generator.generate();
 | `easy` | Low | Few | Slight | User experience priority |
 | `normal` | Medium | Medium | Moderate | Balance security and usability |
 | `hard` | High | Dense | Strong | High security requirements |
-
-### Image Format Support
-
-- **PNG**: Lossless compression, supports transparency, larger file size
-- **JPG/JPEG**: Lossy compression, smaller file size, suitable for web use
-- **WebP**: Modern format, high compression ratio, compatibility needs consideration
 
 ### Default Character Set
 
