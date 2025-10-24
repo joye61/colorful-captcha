@@ -9,7 +9,7 @@ A Node.js based colorful captcha generation library that provides high-quality g
 - 🎨 **Multiple Image Formats**: Support PNG, JPG, JPEG, WebP format output
 - 🛡️ **Three Difficulty Levels**: Easy, normal, hard interference levels
 - 🎯 **Highly Customizable**: Support custom dimensions, character sources, spacing, etc.
-- 🔤 **Smart Characters**: Exclude confusing characters by default (0, O, l, I, 1)
+- 🔤 **Smart Characters**: Exclude confusing characters by default (o, 0, O, l, I, 1)
 - ⚡ **High Performance**: Based on [skia-canvas](https://github.com/samizdatco/skia-canvas) with excellent rendering performance
 
 ## Preview
